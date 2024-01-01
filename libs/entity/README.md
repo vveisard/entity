@@ -1,16 +1,14 @@
 # @vveisard/entity
 
-Entity with immutable state.
+Immutable data structure for entities.
 
 Inspired by [redux entity adapters](https://redux-toolkit.js.org/api/createEntityAdapter) and [@ngrx/entity](https://v8.ngrx.io/guide/entity).
 
 # Design
 
-Entity state a _representational data structure_ for normalized state. The adapter is an implementation detail.
+This library is best used for _representational data transformation_ of another another system. Ideally, you should implement your own adapters with CRUD functions for that system. (eg, writing to a database, localStorage, or an "engine").
 
-Chosen to avoid components, as they do not add any additional value to this representational data structure.
-
-`undefined` and `Function` are not allowed. This is because `Function` may be used as arguments.
+However, a "standard" adapter implementation for a normalized state tree is provided.
 
 # Development
 

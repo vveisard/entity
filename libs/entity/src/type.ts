@@ -1,11 +1,6 @@
 // @region-begin Core
 
 /**
- * ie, not undefined.
- */
-type Defined = string | number | bigint | boolean | symbol | object | null;
-
-/**
  * Type of entity id.
  */
 type EntityId = string;
@@ -16,7 +11,7 @@ type EntityId = string;
  * Entity state should be "plain" (ie, Jsonifiable).
  * Entity state must not be `undefined`, as `undefined` has meaning for function results.
  */
-type EntityState = Defined;
+type EntityState = any;
 
 /**
  * Normalized data structure.
