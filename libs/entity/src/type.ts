@@ -14,9 +14,9 @@ type EntityId = string;
 type EntityState = any;
 
 /**
- * Normalized data structure.
+ * Collection of entities in a normalized data structure.
  */
-interface EntityChunkState<TEntityState extends EntityState = EntityState> {
+interface EntityCollection<TEntityState extends EntityState = EntityState> {
   readonly entities: Record<EntityId, TEntityState>;
   readonly ids: Array<EntityId>;
 }
@@ -41,11 +41,10 @@ interface AddOneFunctionOptions {
  * @returns new entity state when not no-op.
  */
 type AddOneFunction<TEntityState extends EntityState> = (
-  chunkState: EntityChunkState<TEntityState>,
-  entityId: EntityId,
-  entityState: TEntityState,
+  nextEntityId: EntityId,
+  nextEntityState: TEntityState,
   options?: AddOneFunctionOptions,
-) => EntityChunkState<TEntityState>;
+) => void;
 
 // @region-end
 
@@ -64,22 +63,21 @@ interface AddManyFunctionOptions {
 
 /**
  * Add many entity.
- * @returns `chunkState` when all already exist (ie, a no-op).
  */
 type AddManyFunction<TEntityState extends EntityState> = (
-  chunkState: EntityChunkState<TEntityState>,
-  manyEntityIdToState: Record<EntityId, TEntityState>,
+  collectionState: EntityCollection<TEntityState>,
+  nextEntityIdToState: Record<EntityId, TEntityState>,
   options?: AddManyFunctionOptions,
-) => EntityChunkState<TEntityState>;
+) => void;
 
 // @region-end
 
 // @region-begin Entity Adapter
 
 /**
- * Data structure with CRUD operations for a {@link EntityChunkState},
+ * Data structure with CRUD operations for a {@link EntityCollection},
  */
-interface EntityChunkAdapter<TEntityState extends EntityState> {
+interface EntityCollectionAdapter<TEntityState extends EntityState> {
   /**
    * Implementation of {@link AddOneFunction}.
    */
@@ -97,6 +95,8 @@ export {
   type EntityState,
   type AddOneFunction,
   type AddManyFunction,
-  type EntityChunkAdapter,
-  type EntityChunkState,
+  type EntityCollectionAdapter,
+  type EntityCollection,
+  type AddOneFunctionOptions,
+  type AddManyFunctionOptions,
 };

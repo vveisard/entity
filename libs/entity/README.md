@@ -1,14 +1,12 @@
 # @vveisard/entity
 
-Immutable data structure for entities.
+Representational state transfer for entities in normalized data structures.
 
-Inspired by [redux entity adapters](https://redux-toolkit.js.org/api/createEntityAdapter) and [@ngrx/entity](https://v8.ngrx.io/guide/entity).
+Inspired by [redux entity adapters](https://redux-toolkit.js.org/api/createEntityAdapter) and [@ngrx/entity](https://v8.ngrx.io/guide/entity), [GraphQL](https://graphql.org/) and [MongoDB](https://www.mongodb.com/).
 
 # Design
 
-This library is best used for _representational data transformation_ of another another system. Ideally, you should implement your own adapters with CRUD functions for that system. (eg, writing to a database, localStorage, or an "engine").
-
-However, a "standard" adapter implementation for a normalized state tree is provided.
+The purpose of this library is _representational state transfer_ between systems. Ideally, you should implement your own adapters with CRUD functions for that system. (eg, for a database, localStorage, an ECS engine, a render engine).
 
 # Development
 

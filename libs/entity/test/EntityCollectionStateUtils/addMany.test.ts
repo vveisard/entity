@@ -2,25 +2,21 @@
 import { describe, expect, test } from "bun:test";
 //
 import {
-  type EntityChunkAdapter,
-  createStandardEntityAdapter,
-  EntityChunkState,
+  EntityCollectionStateUtils,
+  type EntityCollection,
 } from "../../src/index.ts";
 //
 import { TestEntityState } from "../type.ts";
 
-describe("StandardEntityAdapter.addMany", () => {
-  const adapter: EntityChunkAdapter<TestEntityState> =
-    createStandardEntityAdapter();
-
+describe("EntityCollectionStateUtils.addMany", () => {
   test("does add", () => {
-    const initialEntityChunkState: EntityChunkState<TestEntityState> = {
+    const initialEntityCollectionState: EntityCollection<TestEntityState> = {
       ids: [],
       entities: {},
     };
 
-    const finalEntityChunkState: EntityChunkState<TestEntityState> =
-      adapter.addMany(initialEntityChunkState, {
+    const finalEntityCollectionState: EntityCollection<TestEntityState> =
+      EntityCollectionStateUtils.addMany(initialEntityCollectionState, {
         a: {
           flag: true,
         },
@@ -29,8 +25,8 @@ describe("StandardEntityAdapter.addMany", () => {
         },
       });
 
-    expect(finalEntityChunkState).not.toBe(initialEntityChunkState); // reference changed
-    expect(finalEntityChunkState).toEqual({
+    expect(finalEntityCollectionState).not.toBe(initialEntityCollectionState); // reference changed
+    expect(finalEntityCollectionState).toEqual({
       ids: ["a", "b"],
       entities: {
         a: {
@@ -44,7 +40,7 @@ describe("StandardEntityAdapter.addMany", () => {
   });
 
   test("does add some when some id exists and options throw is false", () => {
-    const initialEntityChunkState: EntityChunkState<TestEntityState> = {
+    const initialEntityCollectionState: EntityCollection<TestEntityState> = {
       ids: ["a"],
       entities: {
         ["a"]: {
@@ -53,9 +49,9 @@ describe("StandardEntityAdapter.addMany", () => {
       },
     };
 
-    const finalEntityChunkState: EntityChunkState<TestEntityState> =
-      adapter.addMany(
-        initialEntityChunkState,
+    const finalEntityCollectionState: EntityCollection<TestEntityState> =
+      EntityCollectionStateUtils.addMany(
+        initialEntityCollectionState,
         {
           b: {
             flag: false,
@@ -66,8 +62,8 @@ describe("StandardEntityAdapter.addMany", () => {
         },
       );
 
-    expect(finalEntityChunkState).not.toBe(initialEntityChunkState); // reference did change
-    expect(finalEntityChunkState).toEqual({
+    expect(finalEntityCollectionState).not.toBe(initialEntityCollectionState); // reference did change
+    expect(finalEntityCollectionState).toEqual({
       ids: ["a", "b"],
       entities: {
         a: {
@@ -81,7 +77,7 @@ describe("StandardEntityAdapter.addMany", () => {
   });
 
   test("does no-op when id exists and options throw is false", () => {
-    const initialEntityChunkState: EntityChunkState<TestEntityState> = {
+    const initialEntityCollectionState: EntityCollection<TestEntityState> = {
       ids: ["a"],
       entities: {
         ["a"]: {
@@ -90,9 +86,9 @@ describe("StandardEntityAdapter.addMany", () => {
       },
     };
 
-    const finalEntityChunkState: EntityChunkState<TestEntityState> =
-      adapter.addMany(
-        initialEntityChunkState,
+    const finalEntityCollectionState: EntityCollection<TestEntityState> =
+      EntityCollectionStateUtils.addMany(
+        initialEntityCollectionState,
         {
           a: {
             flag: false,
@@ -103,11 +99,11 @@ describe("StandardEntityAdapter.addMany", () => {
         },
       );
 
-    expect(finalEntityChunkState).toBe(initialEntityChunkState); // reference did not change
+    expect(finalEntityCollectionState).toBe(initialEntityCollectionState); // reference did not change
   });
 
   test("does throw when id exists and options throw is true", () => {
-    const initialEntityChunkState: EntityChunkState<TestEntityState> = {
+    const initialEntityCollectionState: EntityCollection<TestEntityState> = {
       ids: ["a"],
       entities: {
         ["a"]: {
@@ -117,8 +113,8 @@ describe("StandardEntityAdapter.addMany", () => {
     };
 
     expect(() =>
-      adapter.addMany(
-        initialEntityChunkState,
+      EntityCollectionStateUtils.addMany(
+        initialEntityCollectionState,
         {
           a: {
             flag: false,

@@ -1,2 +1,2 @@
 export * from "./type.ts";
-export * from "./standard/function.ts";
+export { EntityCollectionStateUtils } from "./EntityCollectionStateUtils.ts";
