@@ -1,0 +1,62 @@
+{
+  "name": "@vveisard/template-ts",
+  "version": "0.0.0",
+  "description": "My template for TypeScript projects.",
+  "keywords": [
+    "typescript",
+    "bun"
+  ],
+  "homepage": "https://github.com/vveisard/ts-template",
+  "license": "CC0-1.0",
+  "contributors": [
+    {
+      "name": "Walter Blacke",
+      "email": "walter.blacke@vegabyte.studio"
+    }
+  ],
+  "files": [
+    "src",
+    "out"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "bun": "./src/index.ts",
+      "import": "./out/index.js",
+      "types": "./out/index.d.ts"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vveisard/ts-template"
+  },
+  "scripts": {
+    "prepare": "bun x husky install",
+    "lint": "bun x eslint . --fix",
+    "commitlint": "bun x commitlint --edit $1",
+    "format": "bun x prettier . --write --ignore-unknown",
+    "build": "bun run ./scripts/build.ts"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
+    "@eslint/eslintrc": "^3.0.0",
+    "@types/bun": "latest",
+    "@types/eslint__eslintrc": "^2.1.1",
+    "@types/eslint__js": "^8.42.3",
+    "@typescript-eslint/eslint-plugin": "^6.16.0",
+    "@typescript-eslint/parser": "^6.16.0",
+    "bun-plugin-dts": "^0.2.1",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.1.1",
+    "typescript": "^5.3.3"
+  },
+  "peerDependencies": {},
+  "engines": {
+    "bun": "*"
+  },
+  "private": true
+}

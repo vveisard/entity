@@ -1,0 +1,6 @@
+{
+  "name": "@vveisard/entity-project",
+  "workspaces": [
+    "libs/*"
+  ]
+}
